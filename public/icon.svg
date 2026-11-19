@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Fondo del tema -->
+  <rect width="512" height="512" fill="#0f1115"/>
+  <!-- Pista tenue (como .ring-bg de la app) -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="42"/>
+  <!-- Anillo de progreso verde con hueco arriba (arranca en 12 en punto) -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#3be477" stroke-width="42"
+          stroke-linecap="round" stroke-dasharray="750 130"
+          transform="rotate(-90 256 256)"/>
+  <!-- Triángulo de play con esquinas redondeadas -->
+  <path d="M224 178 L224 334 L344 256 Z" fill="#ffffff" stroke="#ffffff"
+        stroke-width="16" stroke-linejoin="round"/>
+</svg>
