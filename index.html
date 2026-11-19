@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1115">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Tabata">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <title>Tabata Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <main class="app">
+    <section id="tab-entrenar" aria-labelledby="entrenar-title">
+      <header class="screen-header">
+        <h1 id="entrenar-title">Entrenar</h1>
+        <p id="total-preview" class="total-preview" aria-live="polite"></p>
+      </header>
+
+      <form id="config-form" novalidate>
+        <div class="stepper-field">
+          <label for="prep">Preparación</label>
+          <div class="stepper" data-for="prep" data-step="5" data-min="0">
+            <button type="button" class="step-btn minus" aria-label="Menos preparación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+            <span class="stepper-value has-clock">
+              <input id="prep" name="prep" type="number" min="0" step="1" inputmode="numeric" required>
+              <span class="clock" id="prep-clock"></span>
+            </span>
+            <button type="button" class="step-btn plus" aria-label="Más preparación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="stepper-field">
+          <label for="work">Trabajo por ejercicio</label>
+          <div class="stepper" data-for="work" data-step="5" data-min="1">
+            <button type="button" class="step-btn minus" aria-label="Menos trabajo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+            <span class="stepper-value has-clock">
+              <input id="work" name="work" type="number" min="1" step="1" inputmode="numeric" required>
+              <span class="clock" id="work-clock"></span>
+            </span>
+            <button type="button" class="step-btn plus" aria-label="Más trabajo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="stepper-field">
+          <label for="rest">Descanso entre ejercicios</label>
+          <div class="stepper" data-for="rest" data-step="5" data-min="0">
+            <button type="button" class="step-btn minus" aria-label="Menos descanso"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+            <span class="stepper-value has-clock">
+              <input id="rest" name="rest" type="number" min="0" step="1" inputmode="numeric" required>
+              <span class="clock" id="rest-clock"></span>
+            </span>
+            <button type="button" class="step-btn plus" aria-label="Más descanso"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="stepper-field">
+          <label for="exercises">Ejercicios por serie</label>
+          <div class="stepper" data-for="exercises" data-step="1" data-min="1">
+            <button type="button" class="step-btn minus" aria-label="Menos ejercicios"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+            <span class="stepper-value">
+              <input id="exercises" name="exercises" type="number" min="1" step="1" inputmode="numeric" required>
+            </span>
+            <button type="button" class="step-btn plus" aria-label="Más ejercicios"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="stepper-field">
+          <label for="series">Series</label>
+          <div class="stepper" data-for="series" data-step="1" data-min="1">
+            <button type="button" class="step-btn minus" aria-label="Menos series"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+            <span class="stepper-value">
+              <input id="series" name="series" type="number" min="1" step="1" inputmode="numeric" required>
+            </span>
+            <button type="button" class="step-btn plus" aria-label="Más series"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+          </div>
+        </div>
+
+        <section class="settings-group inline-group" aria-labelledby="rests-title">
+          <h2 id="rests-title">Descansos entre series</h2>
+          <div class="stepper-field">
+            <label for="series-rest-default">Aplicar a todas</label>
+            <div class="apply-all-row">
+              <div class="stepper" data-for="series-rest-default" data-step="5" data-min="0">
+                <button type="button" class="step-btn minus" aria-label="Menos descanso por defecto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+                <span class="stepper-value has-clock">
+                  <input id="series-rest-default" type="number" min="0" step="1" inputmode="numeric">
+                  <span class="clock" id="series-rest-default-clock"></span>
+                </span>
+                <button type="button" class="step-btn plus" aria-label="Más descanso por defecto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button>
+              </div>
+              <button type="button" id="apply-rest-default" class="secondary apply-btn">Aplicar</button>
+            </div>
+            <p class="hint left">Cambia este valor para aplicarlo a todas. Si editaste alguna transición, pulsa “Aplicar” para volver a igualarlas.</p>
+          </div>
+          <fieldset id="series-rests">
+            <legend>Por transición (opcional)</legend>
+          </fieldset>
+        </section>
+
+        <p id="errors" class="errors" role="alert" hidden></p>
+
+        <button type="button" id="reset-config" class="ghost-btn">Volver a los valores por defecto</button>
+
+        <div class="sticky-start">
+          <button type="submit" class="primary start-btn">Empezar</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="tab-progreso" hidden>
+      <header class="screen-header">
+        <h1>Progreso</h1>
+      </header>
+      <div id="stats" class="stats">
+        <div class="stat"><span class="stat-label">Completados</span><strong id="stat-completed">0</strong></div>
+        <div class="stat"><span class="stat-label">Sesiones</span><strong id="stat-total">0</strong></div>
+        <div class="stat"><span class="stat-label">Tiempo total</span><strong id="stat-active">0:00</strong></div>
+        <div class="stat"><span class="stat-label">Tiempo de trabajo</span><strong id="stat-work">0:00</strong></div>
+        <div class="stat"><span class="stat-label">Esta semana</span><strong id="stat-week">0 sesiones</strong></div>
+        <div class="stat"><span class="stat-label">Promedio por semana</span><strong id="stat-avg">0</strong></div>
+      </div>
+      <h2>Historial</h2>
+      <p id="history-empty" class="hint" hidden>Todavía no hay sesiones registradas.</p>
+      <ul id="history-list" class="history-list"></ul>
+    </section>
+
+    <section id="tab-ajustes" hidden>
+      <header class="screen-header">
+        <h1>Ajustes</h1>
+      </header>
+
+      <section class="settings-group" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Alertas</h2>
+        <label class="check">
+          <input type="checkbox" id="pref-sound">
+          Sonido
+        </label>
+        <p class="hint left">En iPhone, el sonido funciona con la pantalla encendida.</p>
+        <label class="check">
+          <input type="checkbox" id="pref-vibration">
+          Vibración
+        </label>
+        <p class="hint left">Solo tiene efecto en Android.</p>
+      </section>
+    </section>
+
+    <section id="training-screen" hidden aria-labelledby="phase-label">
+      <div class="training-inner">
+        <div id="phase-label" class="phase-label" aria-live="polite"></div>
+        <div id="phase-detail" class="phase-detail"></div>
+        <div id="work-counter" class="work-counter"></div>
+        <div class="ring-area">
+          <button type="button" id="restart-btn" class="icon-btn" aria-label="Reiniciar entrenamiento">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          </button>
+          <div class="ring-wrap" aria-hidden="true">
+            <div class="ring-layer">
+              <svg class="ring" viewBox="0 0 220 220">
+                <circle class="ring-bg" cx="110" cy="110" r="96"></circle>
+                <circle id="ring-progress" class="ring-fg" cx="110" cy="110" r="96"></circle>
+              </svg>
+            </div>
+            <div id="time-big" class="time-big">0:00</div>
+          </div>
+          <button type="button" id="skip-btn" class="icon-btn" aria-label="Siguiente fase">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+          </button>
+        </div>
+        <div id="time-overall" class="time-overall">0:00 / 0:00</div>
+        <div class="progress">
+          <div class="progress-track">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <span id="progress-text" class="progress-text">0%</span>
+        </div>
+        <div id="next-phase" class="next-phase"></div>
+        <div class="controls controls-main">
+          <button type="button" id="pause-btn" class="secondary">Pausar</button>
+        </div>
+        <div class="controls controls-secondary">
+          <button type="button" id="finish-btn" class="danger hold-btn">
+            <span class="hold-label">Mantén para finalizar</span>
+            <span class="hold-fill" aria-hidden="true"></span>
+          </button>
+        </div>
+        <button type="button" id="abandon-btn" class="ghost-btn">Abandonar</button>
+      </div>
+    </section>
+
+    <section id="summary-screen" hidden>
+      <div class="celebration" aria-hidden="true">
+        <div id="stars" class="stars"></div>
+      </div>
+      <h1 id="summary-title"></h1>
+      <p id="summary-subtitle" class="summary-subtitle"></p>
+      <div id="session-summary" class="summary"></div>
+      <button type="button" id="back-btn" class="primary">Volver a entrenar</button>
+    </section>
+
+    <section id="recovery-screen" hidden>
+      <h1>Entrenamiento sin terminar</h1>
+      <p id="recovery-info" class="recovery-info"></p>
+      <button type="button" id="recovery-resume" class="primary">Reanudar</button>
+      <button type="button" id="recovery-finish" class="secondary">Finalizar</button>
+    </section>
+
+    <section id="session-detail-screen" hidden>
+      <h1 id="detail-date"></h1>
+      <p id="detail-status" class="detail-status"></p>
+      <div id="detail-body" class="summary"></div>
+      <button type="button" id="detail-back" class="secondary">Volver al historial</button>
+    </section>
+  </main>
+
+  <nav id="bottom-nav" class="bottom-nav" aria-label="Navegación principal">
+    <button type="button" class="nav-btn active" data-tab="entrenar" aria-current="page">
+      <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg></span>
+      <span class="nav-label">Entrenar</span>
+    </button>
+    <button type="button" class="nav-btn" data-tab="progreso" aria-current="false">
+      <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+      <span class="nav-label">Progreso</span>
+    </button>
+    <button type="button" class="nav-btn" data-tab="ajustes" aria-current="false">
+      <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+      <span class="nav-label">Ajustes</span>
+    </button>
+  </nav>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
