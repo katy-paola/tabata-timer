@@ -1,13 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <!-- Fondo del tema -->
-  <rect width="512" height="512" fill="#0f1115"/>
-  <!-- Pista tenue (como .ring-bg de la app) -->
-  <circle cx="256" cy="256" r="140" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="42"/>
-  <!-- Anillo de progreso verde con hueco arriba (arranca en 12 en punto) -->
+  <defs>
+    <!-- Fondo con brillo sutil arriba al centro -->
+    <radialGradient id="bg" cx="50%" cy="40%" r="78%">
+      <stop offset="0%" stop-color="#1b2029"/>
+      <stop offset="100%" stop-color="#0d0f13"/>
+    </radialGradient>
+    <!-- Verde con degradado para dar volumen al anillo -->
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5df59b"/>
+      <stop offset="100%" stop-color="#25c968"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Pista tenue -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="42"/>
+
+  <!-- Halo suave detrás del anillo -->
   <circle cx="256" cy="256" r="140" fill="none" stroke="#3be477" stroke-width="42"
           stroke-linecap="round" stroke-dasharray="750 130"
+          transform="rotate(-90 256 256)" filter="url(#glow)" opacity="0.55"/>
+
+  <!-- Anillo de progreso con hueco arriba -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="url(#ring)" stroke-width="42"
+          stroke-linecap="round" stroke-dasharray="750 130"
           transform="rotate(-90 256 256)"/>
-  <!-- Triángulo de play con esquinas redondeadas -->
-  <path d="M224 178 L224 334 L344 256 Z" fill="#ffffff" stroke="#ffffff"
-        stroke-width="16" stroke-linejoin="round"/>
+
+  <!-- Play más pequeño, esquinas redondeadas -->
+  <path d="M235 193 L235 319 L323 256 Z" fill="#ffffff" stroke="#ffffff"
+        stroke-width="14" stroke-linejoin="round"/>
 </svg>
